@@ -1,0 +1,51 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html ng-app="Testeapp">
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <script src="~/Scripts/angular.min.js"></script>
+    <script src="~/Scripts/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript">
+    angular.module("Testeapp", []);
+    angular.module("Testeapp").controller("TesteCtrl", function ($scope, $http) {
+        $scope.teste_click = function () {
+            var param =
+                {
+                    "_A": {
+                        "A1": 1,
+                        "A2": 2,
+                        "A3": 3
+                    },
+                    "_B": {
+                        "B1": 1,
+                        "B2": 2,
+                        "B3": 3
+                    }
+                }                
+
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("TesteReturn", "Teste")',
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    data: JSON.stringify(param),
+                    success: function (data) {
+                        console.log(data);
+                    }                    
+                });
+
+            }
+        });
+    </script>
+</head>
+<body ng-controller="TesteCtrl">
+    <div>
+        <button ng-click="teste_click()">Botão</button>
+    </div>
+</body>
+</html>
